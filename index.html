@@ -2,19 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Emotion-Based Music Recommender</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Emotion Music Recommender</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <!-- ✅ Load face-api.js from CDN -->
   <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+
+  <!-- ✅ Then load your custom script -->
   <script defer src="script.js"></script>
 </head>
-
 <body>
-  <h1>🎧 Emotion Music Recommender</h1>
-  <video id="video" width="720" height="560" autoplay muted></video>
-  <div id="song-container">
-    <h2 id="emotion">Detecting Emotion...</h2>
-    <p id="song-link">🎵 Recommended Song will appear here</p>
+  <div class="container">
+    <h1 class="glow">🎧 Emotion-Based Music Recommender</h1>
+
+    <!-- Camera Feed -->
+    <video id="video" width="720" height="560" autoplay muted></video>
+
+    <!-- Info Panel -->
+    <div class="info-panel glow-border">
+      <h2 id="emotion">Detecting Emotion...</h2>
+
+      <label for="language-select" class="glow-label">Select Language:</label>
+      <select id="language-select" class="glow-select">
+        <option value="all">All</option>
+        <option value="english">English</option>
+        <option value="hindi">Hindi</option>
+        <option value="telugu">Telugu</option>
+      </select>
+
+      <div id="song-list" class="song-list"></div>
+    </div>
+
+    <!-- Favorites -->
+    <div class="favorites-panel glow-border">
+      <h3>Your Favorites ❤️</h3>
+      <div id="favorites-list" class="favorites-list">No favorites yet.</div>
+    </div>
   </div>
 </body>
 </html>
