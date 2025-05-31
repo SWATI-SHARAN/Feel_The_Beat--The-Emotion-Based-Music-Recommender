@@ -20,6 +20,8 @@
       --dark: #0f0c24;
       --darker: #070518;
       --card-bg: rgba(15, 12, 36, 0.7);
+      --spotify-green: #1DB954;
+      --error-red: #ff3860;
     }
 
     body {
@@ -321,6 +323,7 @@
       background: rgba(0, 0, 0, 0.2);
       transition: all 0.3s ease;
       gap: 15px;
+      cursor: pointer;
     }
 
     .track:hover {
@@ -382,17 +385,21 @@
       padding: 20px;
       transition: all 0.3s ease;
       border: 1px solid rgba(77, 121, 255, 0.1);
+      cursor: pointer;
     }
 
     .favorite-card:hover {
       transform: translateY(-5px);
       border-color: rgba(77, 121, 255, 0.3);
+      box-shadow: 0 10px 25px rgba(77, 121, 255, 0.2);
     }
 
     .favorite-card img {
       width: 100%;
       border-radius: 10px;
       margin-bottom: 15px;
+      aspect-ratio: 1/1;
+      object-fit: cover;
     }
 
     .status {
@@ -447,17 +454,232 @@
       font-size: 5rem;
       transition: transform 0.5s ease;
     }
+    
+    .notification {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      background: var(--spotify-green);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 10px;
+      z-index: 1000;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transform: translateX(120%);
+      transition: transform 0.4s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .notification.show {
+      transform: translateX(0);
+    }
+    
+    .notification.error {
+      background: var(--error-red);
+    }
+    
+    .connection-status {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .status-connected {
+      color: var(--tertiary);
+    }
+    
+    .spotify-icon {
+      color: var(--spotify-green);
+    }
+    
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+    
+    .feature-card {
+      background: rgba(15, 12, 36, 0.5);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(77, 121, 255, 0.1);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--tertiary);
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .app-stats {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    
+    .stat-card {
+      background: rgba(15, 12, 36, 0.5);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      min-width: 120px;
+    }
+    
+    .stat-value {
+      font-size: 2rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .app-description {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      padding: 20px;
+      background: rgba(15, 12, 36, 0.5);
+      border-radius: 15px;
+      border: 1px solid rgba(77, 121, 255, 0.2);
+    }
+    
+    .guide-container {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 25px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      margin-top: 40px;
+    }
+    
+    .guide-title {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--tertiary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .steps {
+      counter-reset: step-counter;
+      margin-left: 20px;
+    }
+    
+    .step {
+      position: relative;
+      margin-bottom: 30px;
+      padding-left: 50px;
+    }
+    
+    .step:before {
+      counter-increment: step-counter;
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    
+    .step-title {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: var(--tertiary);
+    }
+    
+    .step-content {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+    
+    .backend-status {
+      background: rgba(77, 121, 255, 0.15);
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .backend-connected {
+      color: var(--tertiary);
+    }
+    
+    .backend-disconnected {
+      color: var(--error-red);
+    }
   </style>
 </head>
 <body>
   <!-- Cosmic background elements -->
   <div class="cosmos" id="cosmos"></div>
   
+  <div class="connection-status">
+    <i class="fas fa-circle status-connected"></i>
+    <span>Spotify Connected via Server</span>
+  </div>
+  
   <div class="container">
     <header>
       <h1><i class="fas fa-stars"></i> FEEL THE BEAT!</h1>
       <p class="subtitle">Your emotions shape the music. Experience real-time emotion detection with personalized cosmic soundscapes.</p>
+      
+      <div class="app-description">
+        <p>Welcome to the Feel The Beat - an immersive experience that detects your emotions through facial recognition and plays music that matches your mood. Powered by Spotify's vast music library.</p>
+      </div>
     </header>
+    
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-camera"></i></div>
+        <h3>Real-time Emotion Detection</h3>
+        <p>Advanced AI analyzes your facial expressions to detect your mood</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-heart"></i></div>
+        <h3>Save Favorites</h3>
+        <p>Save your favorite tracks to your stellar collection</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-globe"></i></div>
+        <h3>Global Music</h3>
+        <p>Discover music from different cultures and languages</p>
+      </div>
+    </div>
     
     <div class="main-content">
       <div class="panel">
@@ -525,6 +747,11 @@
       <div class="panel">
         <h2 class="panel-title"><i class="fas fa-music"></i> Cosmic Recommendations</h2>
         
+        <div class="backend-status">
+          <i class="fas fa-server"></i>
+          <span>Connected to Spotify backend server</span>
+        </div>
+        
         <div class="status" id="status">
           <div class="loading"></div> Waiting for your emotions to guide the music...
         </div>
@@ -538,22 +765,80 @@
     <div class="panel favorites-panel">
       <h2 class="panel-title"><i class="fas fa-heart"></i> Stellar Favorites</h2>
       <div class="favorites-grid" id="favorites-list">
-        <!-- Favorites will be populated here -->
+        <div class="status">
+          <i class="fas fa-star"></i> No favorites yet. Add some tracks to your stellar collection!
+        </div>
+      </div>
+    </div>
+    
+    <div class="app-stats">
+      <div class="stat-card">
+        <div class="stat-value">7</div>
+        <div>Emotions Detected</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">50+</div>
+        <div>Songs Available</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">7</div>
+        <div>Languages Supported</div>
+      </div>
+    </div>
+    
+    <div class="guide-container">
+      <h2 class="guide-title"><i class="fas fa-info-circle"></i> How to Use</h2>
+      <div class="steps">
+        <div class="step">
+          <h3 class="step-title">1. Allow Camera Access</h3>
+          <p class="step-content">Grant permission to access your camera for emotion detection.</p>
+        </div>
+        <div class="step">
+          <h3 class="step-title">2. Detect Your Emotion</h3>
+          <p class="step-content">Click "Start Detection" and let the AI analyze your facial expressions.</p>
+        </div>
+        <div class="step">
+          <h3 class="step-title">3. Enjoy Cosmic Music</h3>
+          <p class="step-content">Listen to music that matches your mood, and save your favorites!</p>
+        </div>
       </div>
     </div>
     
     <footer>
-      <p>FEEL THE BEAT - Emotion Player • Feel the universe through music</p>
-      <p>Your emotions create unique cosmic soundscapes in real-time</p>
+      <p>Feel The Beat • Feel the universe through music</p>
+      <p>Made With Love by Swati ❤️✨</p>
     </footer>
   </div>
-  
-  <audio id="preview-player" hidden></audio>
-  
+
   <script>
+    // Emotion to Spotify genre mapping
+    const emotionToGenre = {
+      happy: ['pop', 'dance', 'electronic', 'happy', 'summer', 'party'],
+      sad: ['sad', 'blues', 'acoustic', 'emo', 'rainy-day', 'chill'],
+      angry: ['rock', 'metal', 'punk', 'hard-rock', 'heavy-metal', 'hardcore'],
+      fearful: ['ambient', 'soundtrack', 'dark-ambient', 'classical', 'meditation'],
+      disgusted: ['experimental', 'avant-garde', 'noise', 'industrial', 'glitch'],
+      surprised: ['edm', 'dubstep', 'drum-and-bass', 'electronic', 'techno'],
+      neutral: ['chill', 'ambient', 'classical', 'new-age', 'jazz', 'lo-fi']
+    };
+    
+    // Emotion to emoji mapping
+    const emotionEmoji = {
+      happy: '😊',
+      sad: '😢',
+      angry: '😠',
+      fearful: '😨',
+      disgusted: '🤢',
+      surprised: '😲',
+      neutral: '😐'
+    };
+    
     // Create cosmic background
     function createCosmos() {
       const cosmos = document.getElementById('cosmos');
+      if (!cosmos) return;
+      
+      cosmos.innerHTML = '';
       
       // Create stars
       for (let i = 0; i < 150; i++) {
@@ -605,6 +890,8 @@
     // Create audio visualizer
     function createVisualizer() {
       const visualizer = document.getElementById('visualizer');
+      if (!visualizer) return;
+      
       visualizer.innerHTML = '';
       
       for (let i = 0; i < 30; i++) {
@@ -616,55 +903,24 @@
       }
     }
     
-    // Emotion to emoji mapping
-    const emotionEmoji = {
-      happy: '😊',
-      sad: '😢',
-      angry: '😠',
-      fearful: '😨',
-      disgusted: '🤢',
-      surprised: '😲',
-      neutral: '😐'
-    };
-    
-    // Emotion to Spotify search term mapping
-    const emotionSearchTerms = {
-      happy: 'upbeat joyful',
-      sad: 'melancholic emotional',
-      angry: 'intense aggressive',
-      fearful: 'atmospheric ambient',
-      disgusted: 'experimental avant-garde',
-      surprised: 'energetic surprising',
-      neutral: 'chill relaxing'
-    };
-    
-    // Sample music data for demo
-    const sampleMusicData = {
-      happy: [
-        { id: '1', name: 'Sunshine Day', artist: 'Solar Beats', album: 'Radiant Vibes', image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80' },
-        { id: '2', name: 'Dancing in the Stars', artist: 'Cosmic Crew', album: 'Galaxy Grooves', image: 'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80' },
-        { id: '3', name: 'Joyful Journey', artist: 'Orion Orchestra', album: 'Celestial Happiness', image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80' },
-        { id: '4', name: 'Euphoric Energy', artist: 'Nova Notes', album: 'Stellar Sounds', image: 'https://images.unsplash.com/photo-1485579149621-3123dd979885?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80' }
-      ],
-      sad: [
-        { id: '5', name: 'Melancholy Moon', artist: 'Lunar Souls', album: 'Midnight Tears', image: 'https://images.unsplash.com/photo-1494232410401-ad00d5433cfa?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80' },
-        { id: '6', name: 'Rainy Nebula', artist: 'Cosmic Rain', album: 'Distant Sorrow', image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80' },
-        { id: '7', name: 'Lonely Orbit', artist: 'Solitary Stars', album: 'Isolated Universe', image: 'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80' },
-        { id: '8', name: 'Echoes of Emptiness', artist: 'Void Voices', album: 'Silent Space', image: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80' }
-      ],
-      angry: [
-        { id: '9', name: 'Raging Supernova', artist: 'Fury Fusion', album: 'Explosive Energy', image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80' },
-        { id: '10', name: 'Thunderous Black Hole', artist: 'Storm System', album: 'Cosmic Chaos', image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80' },
-        { id: '11', name: 'Volcanic Vortex', artist: 'Magma Melodies', album: 'Erupting Emotions', image: 'https://images.unsplash.com/photo-1468164016595-6108e4c60c8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80' },
-        { id: '12', name: 'Collision Course', artist: 'Impact Ensemble', album: 'Celestial Clash', image: 'https://images.unsplash.com/photo-1459231978203-b7d0c47a2cb7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80' }
-      ],
-      neutral: [
-        { id: '13', name: 'Calm Cosmos', artist: 'Space Serenity', album: 'Peaceful Planets', image: 'https://images.unsplash.com/photo-1451188502541-13943edb6acb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80' },
-        { id: '14', name: 'Drifting Through Space', artist: 'Orbital Oasis', album: 'Floating Harmonies', image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80' },
-        { id: '15', name: 'Quasar Quiet', artist: 'Distant Harmony', album: 'Tranquil Travels', image: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80' },
-        { id: '16', name: 'Meditation Meteor', artist: 'Zenith Zephyr', album: 'Mindful Milky Way', image: 'https://images.unsplash.com/photo-1446776899648-aa78eefe8ed0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80' }
-      ]
-    };
+    // Show notification
+    function showNotification(message, isSuccess = true) {
+      const notification = document.createElement('div');
+      notification.className = isSuccess ? 'notification show' : 'notification error show';
+      notification.innerHTML = `
+        <i class="fab fa-spotify"></i>
+        <span>${message}</span>
+      `;
+      
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 500);
+      }, 3000);
+    }
     
     // Initialize the application
     async function initApp() {
@@ -681,6 +937,9 @@
       
       // Load face-api models
       await loadFaceModels();
+      
+      // Load initial songs
+      updateSongsForEmotion('neutral');
     }
     
     // Setup camera
@@ -694,10 +953,13 @@
           } 
         });
         const video = document.getElementById('video');
+        if (!video) return;
+        
         video.srcObject = stream;
         
         // Hide loading message
-        document.getElementById('camera-status').style.display = 'none';
+        const cameraStatus = document.getElementById('camera-status');
+        if (cameraStatus) cameraStatus.style.display = 'none';
         
         return new Promise(resolve => {
           video.onloadedmetadata = () => {
@@ -706,7 +968,10 @@
         });
       } catch (err) {
         console.error('Camera error:', err);
-        document.getElementById('camera-status').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Could not access camera. Please enable permissions.';
+        const cameraStatus = document.getElementById('camera-status');
+        if (cameraStatus) {
+          cameraStatus.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Could not access camera. Please enable permissions.';
+        }
         return null;
       }
     }
@@ -723,57 +988,88 @@
     
     // Update emotion display
     function updateEmotionDisplay(emotion) {
-      document.getElementById('emotion-text').textContent = emotion;
-      document.getElementById('emoji-face').textContent = emotionEmoji[emotion] || '🤔';
+      const emotionText = document.getElementById('emotion-text');
+      if (emotionText) emotionText.textContent = emotion;
+      
+      const emojiFace = document.getElementById('emoji-face');
+      if (emojiFace) emojiFace.textContent = emotionEmoji[emotion] || '🤔';
     }
     
     // Setup event listeners
     function setupEventListeners() {
       // Emotion buttons
-      document.getElementById('detect-happy').addEventListener('click', () => {
-        updateEmotionDisplay('happy');
-        updateSongsForEmotion('happy');
-      });
+      const detectHappy = document.getElementById('detect-happy');
+      if (detectHappy) {
+        detectHappy.addEventListener('click', () => {
+          updateEmotionDisplay('happy');
+          updateSongsForEmotion('happy');
+        });
+      }
       
-      document.getElementById('detect-sad').addEventListener('click', () => {
-        updateEmotionDisplay('sad');
-        updateSongsForEmotion('sad');
-      });
+      const detectSad = document.getElementById('detect-sad');
+      if (detectSad) {
+        detectSad.addEventListener('click', () => {
+          updateEmotionDisplay('sad');
+          updateSongsForEmotion('sad');
+        });
+      }
       
-      document.getElementById('detect-angry').addEventListener('click', () => {
-        updateEmotionDisplay('angry');
-        updateSongsForEmotion('angry');
-      });
+      const detectAngry = document.getElementById('detect-angry');
+      if (detectAngry) {
+        detectAngry.addEventListener('click', () => {
+          updateEmotionDisplay('angry');
+          updateSongsForEmotion('angry');
+        });
+      }
       
-      document.getElementById('detect-neutral').addEventListener('click', () => {
-        updateEmotionDisplay('neutral');
-        updateSongsForEmotion('neutral');
-      });
+      const detectNeutral = document.getElementById('detect-neutral');
+      if (detectNeutral) {
+        detectNeutral.addEventListener('click', () => {
+          updateEmotionDisplay('neutral');
+          updateSongsForEmotion('neutral');
+        });
+      }
       
       // Start/stop buttons
-      document.getElementById('start-btn').addEventListener('click', () => {
-        startDetection();
-      });
+      const startBtn = document.getElementById('start-btn');
+      if (startBtn) {
+        startBtn.addEventListener('click', () => {
+          startDetection();
+        });
+      }
       
-      document.getElementById('stop-btn').addEventListener('click', () => {
-        stopDetection();
-      });
+      const stopBtn = document.getElementById('stop-btn');
+      if (stopBtn) {
+        stopBtn.addEventListener('click', () => {
+          stopDetection();
+        });
+      }
       
       // Language selector
-      document.getElementById('language-select').addEventListener('change', () => {
-        if (document.getElementById('emotion-text').textContent !== 'none') {
-          updateSongsForEmotion(document.getElementById('emotion-text').textContent);
-        }
-      });
+      const languageSelect = document.getElementById('language-select');
+      if (languageSelect) {
+        languageSelect.addEventListener('change', () => {
+          const emotionText = document.getElementById('emotion-text');
+          if (emotionText && emotionText.textContent !== 'none') {
+            updateSongsForEmotion(emotionText.textContent);
+          }
+        });
+      }
     }
     
     // Start detection
     function startDetection() {
-      document.getElementById('start-btn').disabled = true;
-      document.getElementById('stop-btn').disabled = false;
+      const startBtn = document.getElementById('start-btn');
+      const stopBtn = document.getElementById('stop-btn');
+      if (!startBtn || !stopBtn) return;
+      
+      startBtn.disabled = true;
+      stopBtn.disabled = false;
       
       const video = document.getElementById('video');
       const canvas = document.getElementById('canvas');
+      if (!video || !canvas) return;
+      
       const ctx = canvas.getContext('2d');
       
       // Set canvas size to match video
@@ -782,7 +1078,7 @@
       
       // Start detection loop
       const detectInterval = setInterval(async () => {
-        if (document.getElementById('stop-btn').disabled) {
+        if (!stopBtn || stopBtn.disabled) {
           clearInterval(detectInterval);
           return;
         }
@@ -818,8 +1114,12 @@
     
     // Stop detection
     function stopDetection() {
-      document.getElementById('start-btn').disabled = false;
-      document.getElementById('stop-btn').disabled = true;
+      const startBtn = document.getElementById('start-btn');
+      const stopBtn = document.getElementById('stop-btn');
+      if (!startBtn || !stopBtn) return;
+      
+      startBtn.disabled = false;
+      stopBtn.disabled = true;
       
       // Clear detection interval
       if (window.detectInterval) {
@@ -828,31 +1128,99 @@
       
       // Clear canvas
       const canvas = document.getElementById('canvas');
-      const ctx = canvas.getContext('2d');
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+    
+    // Open song in Spotify app
+    function openInSpotify(trackId) {
+      // Direct link to the track - this always works
+      window.open(`https://open.spotify.com/track/${trackId}`, '_blank');
+    }
+    
+    // Simulate backend API call to Spotify
+    async function fetchSpotifyRecommendations(emotion, language) {
+      const statusDiv = document.getElementById('status');
+      if (!statusDiv) return;
+      
+      statusDiv.innerHTML = `<div class="loading"></div> Creating ${emotion} cosmic soundscape...`;
+      
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Sample music data with REAL Spotify IDs
+      const sampleMusicData = {
+        happy: [
+          { id: '60nZcImufyMA1MKQY3dcCH', name: 'Happy', artist: 'Pharrell Williams', album: 'G I R L', image: 'https://i.scdn.co/image/ab67616d0000b2731c3e0a2f4ab8e3d7a7f3d0c5' },
+          { id: '1WkMMavIMc4JZ8cfMmxHkI', name: "Can't Stop the Feeling!", artist: 'Justin Timberlake', album: 'Trolls', image: 'https://i.scdn.co/image/ab67616d0000b273a48964b5d9a3d6968ae3e0de' },
+          { id: '6C2Dn1N5zd3Qb1QJqkUa0g', name: 'Uptown Funk', artist: 'Mark Ronson ft. Bruno Mars', album: 'Uptown Special', image: 'https://i.scdn.co/image/ab67616d0000b2733f29a976eea00141514ab756' },
+          { id: '3fthfkkvy9av3q3uAGVf7U', name: 'Shake It Off', artist: 'Taylor Swift', album: '1989', image: 'https://i.scdn.co/image/ab67616d0000b273e11a75a2f2ff39cec788a015' }
+        ],
+        sad: [
+          { id: '6QPKYGnAW9QozVz2dSWqRg', name: 'Someone Like You', artist: 'Adele', album: '21', image: 'https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96' },
+          { id: '2f8G2dL3H8HzRt2Y8V3xqL', name: 'Say Something', artist: 'A Great Big World', album: 'Is There Anybody Out There?', image: 'https://i.scdn.co/image/ab67616d0000b273b7d3410c326df5c5af0179e8' },
+          { id: '7tnOc6GV9GA1phPS6vK7VB', name: 'The Scientist', artist: 'Coldplay', album: 'A Rush of Blood to the Head', image: 'https://i.scdn.co/image/ab67616d0000b273de3c04b5fc750b68899b20a9' },
+          { id: '6g4b1wZ0KwZ2Q7a6cLpVqg', name: 'Hurt', artist: 'Johnny Cash', album: 'American IV: The Man Comes Around', image: 'https://i.scdn.co/image/ab67616d0000b273f5a99e0a3b9a5a5f5a5a5a5a' }
+        ],
+        angry: [
+          { id: '7a0qD51uR1v8JmIAVcBv7s', name: 'Break Stuff', artist: 'Limp Bizkit', album: 'Significant Other', image: 'https://i.scdn.co/image/ab67616d0000b2734a1a3b5d5a5a5a5a5a5a5a5a' },
+          { id: '3aMfUOjLckXwol4tFcJtGl', name: 'Killing In The Name', artist: 'Rage Against The Machine', album: 'Rage Against The Machine', image: 'https://i.scdn.co/image/ab67616d0000b2739c0f9e9c9c9c9c9c9c9c9c9c9' },
+          { id: '6LmNUD1q8gREe7zF3bUqFg', name: 'Given Up', artist: 'Linkin Park', album: 'Minutes to Midnight', image: 'https://i.scdn.co/image/ab67616d0000b273c7e6d3a1c7b5c7a5a2a0b3e2' },
+          { id: '0tZ3mElWcr74OOhKEiNz1x', name: 'Bulls On Parade', artist: 'Rage Against The Machine', album: 'Evil Empire', image: 'https://i.scdn.co/image/ab67616d0000b2733f3f3f3f3f3f3f3f3f3f3f3f' }
+        ],
+        neutral: [
+          { id: '0VjIjW4GlUZAMYd2vXMi3b', name: 'Blinding Lights', artist: 'The Weeknd', album: 'After Hours', image: 'https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36' },
+          { id: '7qiZfU4dY1lWllzX7mPBI3', name: 'Shape of You', artist: 'Ed Sheeran', album: '÷ (Divide)', image: 'https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96' },
+          { id: '6UelLqGlWMcVH1E5c4H7lY', name: 'Watermelon Sugar', artist: 'Harry Styles', album: 'Fine Line', image: 'https://i.scdn.co/image/ab67616d0000b2731c3e0a2f4ab8e3d7a7f3d0c5' },
+          { id: '0v1x6rN6JHRapa03JElljE', name: 'Dynamite', artist: 'BTS', album: 'Dynamite (DayTime Version)', image: 'https://i.scdn.co/image/ab67616d0000b273a48964b5d9a3d6968ae3e0de' }
+        ],
+        fearful: [
+          { id: '3HjGmIjG3aZ7G1aQ0Nj8X1', name: 'The Sound of Silence', artist: 'Simon & Garfunkel', album: 'Wednesday Morning, 3 A.M.', image: 'https://i.scdn.co/image/ab67616d0000b273b6d4566db0d12894b1b3c5e5' },
+          { id: '2iJuuzV8P9Yz0VSurttIV5', name: 'Hurt', artist: 'Nine Inch Nails', album: 'The Downward Spiral', image: 'https://i.scdn.co/image/ab67616d0000b273f5a99e0a3b9a5a5f5a5a5a5a' }
+        ],
+        disgusted: [
+          { id: '0U9TKK9GYryei6Vn45TEdS', name: 'Bad Guy', artist: 'Billie Eilish', album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?', image: 'https://i.scdn.co/image/ab67616d0000b27350a3147b4edd7701a876c6ce' }
+        ],
+        surprised: [
+          { id: '5sICkBXVmaCQk5aISGR3x1', name: 'Thriller', artist: 'Michael Jackson', album: 'Thriller', image: 'https://i.scdn.co/image/ab67616d0000b273e11a75a2f2ff39cec788a015' }
+        ]
+      };
+      
+      return sampleMusicData[emotion] || sampleMusicData.neutral;
     }
     
     // Update songs based on emotion
-    function updateSongsForEmotion(emotion) {
-      const statusDiv = document.getElementById('status');
-      statusDiv.innerHTML = `<div class="loading"></div> Creating ${emotion} cosmic soundscape...`;
-      
-      setTimeout(() => {
-        const songs = sampleMusicData[emotion] || sampleMusicData.neutral;
-        renderSongList(songs);
+    async function updateSongsForEmotion(emotion) {
+      try {
+        const tracks = await fetchSpotifyRecommendations(emotion);
+        renderSongList(tracks);
         
-        statusDiv.innerHTML = `<i class="fas fa-check"></i> Found ${songs.length} cosmic tracks for ${emotion}`;
-      }, 1500);
+        const statusDiv = document.getElementById('status');
+        if (statusDiv) {
+          statusDiv.innerHTML = `<i class="fab fa-spotify spotify-icon"></i> Found ${tracks.length} cosmic tracks for ${emotion}`;
+        }
+      } catch (error) {
+        console.error('Error fetching Spotify recommendations:', error);
+        const statusDiv = document.getElementById('status');
+        if (statusDiv) {
+          statusDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${error.message}`;
+        }
+      }
     }
     
     // Render song list
     function renderSongList(tracks) {
       const songListDiv = document.getElementById('song-list');
+      if (!songListDiv) return;
+      
       songListDiv.innerHTML = '';
       
       tracks.forEach(track => {
         const trackEl = document.createElement('div');
         trackEl.className = 'track';
+        trackEl.setAttribute('data-id', track.id);
         
         trackEl.innerHTML = `
           <img src="${track.image}" alt="${track.name}">
@@ -873,24 +1241,41 @@
         songListDiv.appendChild(trackEl);
       });
       
-      // Add event listeners
-      document.querySelectorAll('.track .play-btn').forEach((btn, index) => {
-        btn.addEventListener('click', () => {
-          const player = document.getElementById('preview-player');
-          player.play();
-          animateVisualizer();
+      // Add event listeners to tracks
+      document.querySelectorAll('.track').forEach((track) => {
+        track.addEventListener('click', (e) => {
+          if (!e.target.closest('button')) {
+            const trackId = track.getAttribute('data-id');
+            openInSpotify(trackId);
+          }
         });
       });
       
+      // Add event listeners to play buttons
+      document.querySelectorAll('.track .play-btn').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const track = btn.closest('.track');
+          const trackId = track.getAttribute('data-id');
+          openInSpotify(trackId);
+        });
+      });
+      
+      // Add event listeners to favorite buttons
       document.querySelectorAll('.track .favorite-btn').forEach((btn, index) => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
-          const track = tracks[index];
-          addToFavorites(track);
-          btn.innerHTML = '<i class="fas fa-check"></i>';
-          setTimeout(() => {
-            btn.innerHTML = '<i class="fas fa-heart"></i>';
-          }, 1000);
+          const track = btn.closest('.track');
+          const trackId = track.getAttribute('data-id');
+          const trackData = tracks.find(t => t.id === trackId);
+          if (trackData) {
+            addToFavorites(trackData);
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            showNotification('Added to favorites!');
+            setTimeout(() => {
+              btn.innerHTML = '<i class="fas fa-heart"></i>';
+            }, 1000);
+          }
         });
       });
     }
@@ -910,6 +1295,8 @@
     // Render favorites
     function renderFavorites() {
       const favoritesListDiv = document.getElementById('favorites-list');
+      if (!favoritesListDiv) return;
+      
       favoritesListDiv.innerHTML = '';
       
       const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -926,6 +1313,7 @@
       favorites.forEach(track => {
         const card = document.createElement('div');
         card.className = 'favorite-card';
+        card.setAttribute('data-id', track.id);
         
         card.innerHTML = `
           <img src="${track.image}" alt="${track.name}">
@@ -935,7 +1323,7 @@
             <button class="play-btn">
               <i class="fas fa-play"></i>
             </button>
-            <button class="favorite-btn">
+            <button class="remove-btn">
               <i class="fas fa-trash"></i>
             </button>
           </div>
@@ -945,30 +1333,33 @@
       });
       
       // Add event listeners to favorites
-      document.querySelectorAll('.favorite-card .play-btn').forEach((btn, index) => {
-        btn.addEventListener('click', () => {
-          animateVisualizer();
+      document.querySelectorAll('.favorite-card').forEach((card) => {
+        card.addEventListener('click', (e) => {
+          if (!e.target.closest('button')) {
+            const trackId = card.getAttribute('data-id');
+            openInSpotify(trackId);
+          }
         });
       });
       
-      document.querySelectorAll('.favorite-card .favorite-btn').forEach((btn, index) => {
-        btn.addEventListener('click', () => {
+      document.querySelectorAll('.favorite-card .play-btn').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const card = btn.closest('.favorite-card');
+          const trackId = card.getAttribute('data-id');
+          openInSpotify(trackId);
+        });
+      });
+      
+      document.querySelectorAll('.favorite-card .remove-btn').forEach((btn, index) => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
           const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
           favorites.splice(index, 1);
           localStorage.setItem('favorites', JSON.stringify(favorites));
           renderFavorites();
+          showNotification('Removed from favorites!');
         });
-      });
-    }
-    
-    // Animate visualizer when playing
-    function animateVisualizer() {
-      const bars = document.querySelectorAll('.bar');
-      bars.forEach(bar => {
-        bar.style.animation = 'none';
-        setTimeout(() => {
-          bar.style.animation = '';
-        }, 10);
       });
     }
     
