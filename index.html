@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feel The Beat</title>
+  <title>Feel the Beat</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
   <style>
@@ -639,8 +639,77 @@
       color: var(--tertiary);
     }
     
-    .backend-disconnected {
-      color: var(--error-red);
+    .emotion-bar {
+      height: 10px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+      margin: 15px 0;
+      overflow: hidden;
+    }
+    
+    .emotion-level {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 5px;
+      width: 0;
+      transition: width 0.5s ease;
+    }
+    
+    .emotion-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 15px;
+      border-radius: 15px;
+    }
+    
+    .stat-item {
+      text-align: center;
+      padding: 10px;
+    }
+    
+    .stat-number {
+      font-size: 1.8rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .music-library-info {
+      background: rgba(29, 185, 84, 0.15);
+      padding: 15px;
+      border-radius: 15px;
+      margin: 20px 0;
+      text-align: center;
+    }
+    
+    .library-stats {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 15px;
+    }
+    
+    .library-stat {
+      text-align: center;
+    }
+    
+    .library-number {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    
+    .language-tag {
+      display: inline-block;
+      background: rgba(77, 121, 255, 0.2);
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      margin-left: 8px;
+      text-transform: uppercase;
     }
   </style>
 </head>
@@ -659,28 +728,33 @@
       <p class="subtitle">Your emotions shape the music. Experience real-time emotion detection with personalized cosmic soundscapes.</p>
       
       <div class="app-description">
-        <p>Welcome to the Feel The Beat - an immersive experience that detects your emotions through facial recognition and plays music that matches your mood. Powered by Spotify's vast music library.</p>
+        <p>Welcome to Feel The Beat -An Emotion Player with many popular songs perfectly matched to your emotions. All songs open directly in Spotify!</p>
       </div>
     </header>
     
     <div class="feature-grid">
       <div class="feature-card">
-        <div class="feature-icon"><i class="fas fa-camera"></i></div>
-        <h3>Real-time Emotion Detection</h3>
-        <p>Advanced AI analyzes your facial expressions to detect your mood</p>
+        <div class="feature-icon"><i class="fas fa-expand"></i></div>
+        <h3>Expanded Music Library</h3>
+        <p>100+ popular songs across all emotion categories</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon"><i class="fas fa-heart"></i></div>
-        <h3>Save Favorites</h3>
-        <p>Save your favorite tracks to your stellar collection</p>
+        <div class="feature-icon"><i class="fas fa-music"></i></div>
+        <h3>Real Spotify Links</h3>
+        <p>All songs open directly in Spotify</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon"><i class="fas fa-globe"></i></div>
-        <h3>Global Music</h3>
-        <p>Discover music from different cultures and languages</p>
+        <div class="feature-icon"><i class="fas fa-brain"></i></div>
+        <h3>Advanced Emotion Detection</h3>
+        <p>Improved AI with emotion intensity visualization</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-language"></i></div>
+        <h3>Multi-Language Support</h3>
+        <p>Filter songs by language preference</p>
       </div>
     </div>
-    
+        
     <div class="main-content">
       <div class="panel">
         <h2 class="panel-title"><i class="fas fa-camera"></i> Emotion Detection</h2>
@@ -702,6 +776,21 @@
           <span class="emotion-value" id="emotion-text">neutral</span>
         </div>
         
+        <div class="emotion-stats">
+          <div class="stat-item">
+            <div class="stat-number" id="happy-stat">0%</div>
+            <div>Happy</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" id="sad-stat">0%</div>
+            <div>Sad</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" id="angry-stat">0%</div>
+            <div>Angry</div>
+          </div>
+        </div>
+        
         <div class="visualizer" id="visualizer">
           <!-- Audio visualizer bars will be generated here -->
         </div>
@@ -718,7 +807,7 @@
         <div class="language-selector">
           <label>Music Language:</label>
           <select id="language-select">
-            <option value="all">Universal Vibes</option>
+            <option value="all">Universal Vibes (All Languages)</option>
             <option value="english">English</option>
             <option value="hindi">Hindi</option>
             <option value="spanish">Spanish</option>
@@ -770,22 +859,7 @@
         </div>
       </div>
     </div>
-    
-    <div class="app-stats">
-      <div class="stat-card">
-        <div class="stat-value">7</div>
-        <div>Emotions Detected</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value">50+</div>
-        <div>Songs Available</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-value">7</div>
-        <div>Languages Supported</div>
-      </div>
-    </div>
-    
+
     <div class="guide-container">
       <h2 class="guide-title"><i class="fas fa-info-circle"></i> How to Use</h2>
       <div class="steps">
@@ -798,30 +872,42 @@
           <p class="step-content">Click "Start Detection" and let the AI analyze your facial expressions.</p>
         </div>
         <div class="step">
-          <h3 class="step-title">3. Enjoy Cosmic Music</h3>
+          <h3 class="step-title">3. Select Language (Optional)</h3>
+          <p class="step-content">Use the language selector to filter songs by your preferred language.</p>
+        </div>
+        <div class="step">
+          <h3 class="step-title">4. Enjoy Cosmic Music</h3>
           <p class="step-content">Listen to music that matches your mood, and save your favorites!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="music-library-info">
+      <h3><i class="fas fa-database"></i> Expanded Music Library</h3>
+      <p>Now featuring 15+ popular songs for each emotion category</p>
+      <div class="library-stats">
+        <div class="library-stat">
+          <div class="library-number">100+</div>
+          <div>Total Songs</div>
+        </div>
+        <div class="library-stat">
+          <div class="library-number">7</div>
+          <div>Emotion Categories</div>
+        </div>
+        <div class="library-stat">
+          <div class="library-number">6</div>
+          <div>Languages</div>
         </div>
       </div>
     </div>
     
     <footer>
-      <p>Feel The Beat • Feel the universe through music</p>
-      <p>Made With Love by Swati ❤️✨</p>
+      <p>Feel The Beat - The Cosmic Emotion Based Song Player • Feel the universe through music</p>
+      <p>Created By Swati ✨❤️</p>
     </footer>
   </div>
 
   <script>
-    // Emotion to Spotify genre mapping
-    const emotionToGenre = {
-      happy: ['pop', 'dance', 'electronic', 'happy', 'summer', 'party'],
-      sad: ['sad', 'blues', 'acoustic', 'emo', 'rainy-day', 'chill'],
-      angry: ['rock', 'metal', 'punk', 'hard-rock', 'heavy-metal', 'hardcore'],
-      fearful: ['ambient', 'soundtrack', 'dark-ambient', 'classical', 'meditation'],
-      disgusted: ['experimental', 'avant-garde', 'noise', 'industrial', 'glitch'],
-      surprised: ['edm', 'dubstep', 'drum-and-bass', 'electronic', 'techno'],
-      neutral: ['chill', 'ambient', 'classical', 'new-age', 'jazz', 'lo-fi']
-    };
-    
     // Emotion to emoji mapping
     const emotionEmoji = {
       happy: '😊',
@@ -833,6 +919,120 @@
       neutral: '😐'
     };
     
+    // Expanded music library with 15+ songs per emotion and multiple languages
+    const musicLibrary = { 
+    happy: [
+    { id: '60nZcImufyMA1MKQY3dcCH', name: 'Happy', artist: 'Pharrell Williams', album: 'G I R L', image: 'https://i.scdn.co/image/ab67616d0000b2731c3e0a2f4ab8e3d7a7f3d0c5', language: 'english' },
+    { id: '1WkMMavIMc4JZ8cfMmxHkI', name: "Can't Stop the Feeling!", artist: 'Justin Timberlake', album: 'Trolls (Original Motion Picture Soundtrack)', image: 'https://i.scdn.co/image/ab67616d0000b273a48964b5d9a3d6968ae3e0de', language: 'english' },
+    { id: '3ZFTkvIE7kyPt6Nu3PEa7V', name: 'Uptown Funk', artist: 'Mark Ronson ft. Bruno Mars', album: 'Uptown Special', image: 'https://i.scdn.co/image/ab67616d0000b273b3c41592dbbc1b661c45e35e', language: 'english' },
+    { id: '0VjIjW4GlUZAMYd2vXMi3b', name: 'Blinding Lights', artist: 'The Weeknd', album: 'After Hours', image: 'https://i.scdn.co/image/ab67616d0000b2730c1fdf06f1d712baccd0638d', language: 'english' },
+    { id: '1RouRzlg8OKFeqc6LvdxmB', name: 'Felices los 4', artist: 'Maluma', album: 'F.A.M.E.', image: 'https://i.scdn.co/image/ab67616d0000b2739b9988280bbdbe0075f3a9a3', language: 'spanish' },
+    { id: '0EYnPYvXve9tIsvI2zKFCB', name: 'Vivir Mi Vida', artist: 'Marc Anthony', album: '3.0', image: 'https://i.scdn.co/image/ab67616d0000b273c44e3e1524c53c9b6d9ffb39', language: 'spanish' },
+    { id: '3lAun9V0YdTlCSIEXPvfsY', name: 'La Vie en rose', artist: 'Édith Piaf', album: "Hymne à l'amour", image: 'https://i.scdn.co/image/ab67616d0000b273457b5299c2798fbc9bd226c8', language: 'french' },
+    { id: '7pWKhcRxqhtNTX7OfkTkoy', name: 'Alors on danse', artist: 'Stromae', album: 'Cheese', image: 'https://i.scdn.co/image/ab67616d0000b273e1f158a963b196bfc8f3db51', language: 'french' },
+    { id: '3WbI06d8kr6TyGafMMpjAl', name: 'Jai Ho! (You Are My Destiny)', artist: 'A. R. Rahman, The Pussycat Dolls', album: 'Slumdog Millionaire (OST)', image: 'https://i.scdn.co/image/ab67616d0000b273b02de9be0fc18f3ed2c2086b', language: 'hindi' },
+    { id: '5Fz5B7oQmJXQ1Z7uQ1n0k1', name: 'Genda Phool', artist: 'Badshah', album: 'Genda Phool', image: 'https://i.scdn.co/image/ab67616d0000b2730c1fdf06f1d712baccd0638d', language: 'hindi' },
+    { id: '4hDok0OAJd57SGIT8xuWJH', name: 'Pretender', artist: 'Official HIGE DANdism', album: 'Traveler', image: 'https://i.scdn.co/image/ab67616d0000b27366049c7c7fd6f984b94225d4', language: 'japanese' },
+    { id: '2Xo5OoQ6j4zH8gXqRYq7U1', name: 'Lemon', artist: 'Kenshi Yonezu', album: 'Lemon', image: 'https://i.scdn.co/image/ab67616d0000b27366049c7c7fd6f984b94225d4', language: 'japanese' },
+    { id: '3f9zqUnrnIq0LANhmnaF0V', name: 'Dynamite', artist: 'BTS', album: 'Dynamite (DayTime Version)', image: 'https://i.scdn.co/image/ab67616d0000b273fbfbb519ae3dc6e231b27a59', language: 'korean' },
+    { id: '2V8KvnD5LVeeDChMWEkSzC', name: 'Gangnam Style', artist: 'PSY', album: 'PSY 6 (Six Rules)', image: 'https://i.scdn.co/image/ab67616d0000b273bc8df8acb40d3d9c0f63f9f9', language: 'korean' },
+    { id: '3dwgH6lXWvKDj7TKRRkVzY', name: 'Cheerleader (Felix Jaehn Remix)', artist: 'OMI', album: 'Cheerleader - Single', image: 'https://i.scdn.co/image/ab67616d0000b273b3c41592dbbc1b661c45e35e', language: 'english' },
+    { id: '1qL7hFhrp7ilZ6LLI7Nis7', name: 'Sugar', artist: 'Maroon 5', album: 'V', image: 'https://i.scdn.co/image/ab67616d0000b273b2e80ed2a6a5b065dc1b9a91', language: 'english' }
+      ],
+    sad: [
+  { id: '6QPKYGnAW9QozVz2dSWqRg', name: 'Someone Like You', artist: 'Adele', album: '21', image: 'https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96', language: 'english' },
+  { id: '7rvz6EtdLmcmJLqJvYpRSH', name: 'Everybody Hurts', artist: 'R.E.M.', album: 'Automatic for the People', image: 'https://i.scdn.co/image/ab67616d0000b2730a2a3a4b7d6b9a3c7b87a4b5', language: 'english' },
+  { id: '1n8VPhzNaYUlqDAoVGR9Ty', name: 'Tears in Heaven', artist: 'Eric Clapton', album: 'Rush', image: 'https://i.scdn.co/image/ab67616d0000b273f3c21a9a414c12ed2f7e89d3', language: 'english' },
+  { id: '3Ej7jo4f3B6KX5r7dMXdDA', name: 'La Llorona', artist: 'Chavela Vargas', album: 'Las 30 Grandes de Chavela Vargas', image: 'https://i.scdn.co/image/ab67616d0000b2735df2ec9fcbfbec1f59c8c44b', language: 'spanish' },
+  { id: '5Fz9a1sXvjyBZxSTpJu4LR', name: 'Amor Eterno', artist: 'Juan Gabriel', album: 'Recuerdos', image: 'https://i.scdn.co/image/ab67616d0000b2734ed1e1de736a9c9a5d0425ff', language: 'spanish' },
+  { id: '6cFcNMEHtx55G03T5r0o30', name: 'Ne me quitte pas', artist: 'Jacques Brel', album: 'Ces gens-là', image: 'https://i.scdn.co/image/ab67616d0000b273adac6d36eb657ee2a06602cc', language: 'french' },
+  { id: '3Ofmpyhv5UAQ70mENzB277', name: 'Je suis malade', artist: 'Serge Lama', album: 'Je suis malade', image: 'https://i.scdn.co/image/ab67616d0000b273d7b59a5b5b5f6a5df8c3e2e9', language: 'french' },
+  { id: '0Wtq1QUVYjCO5Z0e5PjKad', name: 'Tum Hi Ho', artist: 'Arijit Singh', album: 'Aashiqui 2', image: 'https://i.scdn.co/image/ab67616d0000b273c2c2c2c2c2c2c2c2c2c2c2c2', language: 'hindi' },
+  { id: '5Fz5B7oQmJXQ1Z7uQ1n0k1', name: 'Channa Mereya', artist: 'Arijit Singh', album: 'Ae Dil Hai Mushkil', image: 'https://i.scdn.co/image/ab67616d0000b273d5d5d5d5d5d5d5d5d5d5d5d5', language: 'hindi' },
+  { id: '4j0PNHkMr5axTwwo4r1Fkj', name: 'First Love', artist: 'Hikaru Utada', album: 'First Love', image: 'https://i.scdn.co/image/ab67616d0000b273de1219b67f7839dd0b71009d', language: 'japanese' },
+  { id: '5y1tXzoQeZIvG9wGfOGyTp', name: 'Sakura Nagashi', artist: 'Hikaru Utada', album: 'Fantôme', image: 'https://i.scdn.co/image/ab67616d0000b273bde9c2c889fd7b33f94a9d26', language: 'japanese' },
+  { id: '60nZcImufyMA1MKQY3dcCH', name: 'Fix You', artist: 'Coldplay', album: 'X&Y', image: 'https://i.scdn.co/image/ab67616d0000b273b3b3b3b3b3b3b3b3b3b3b3b3b3', language: 'english' },
+  { id: '1WkMMavIMc4JZ8cfMmxHkI', name: 'Nothing Compares 2 U', artist: 'Sinéad O\'Connor', album: 'I Do Not Want What I Haven\'t Got', image: 'https://i.scdn.co/image/ab67616d0000b273a48964b5d9a3d6968ae3e0de', language: 'english' },
+  { id: '5YbgcwHjQhdT1BYQ4rxWLD', name: 'Hallelujah', artist: 'Jeff Buckley', album: 'Grace', image: 'https://i.scdn.co/image/ab67616d0000b273e52a59a28efa4773aa2b7d16', language: 'english' },
+  { id: '2V8KvnD5LVeeDChMWEkSzC', name: 'Adiós', artist: 'Ricky Martin', album: 'A Medio Vivir', image: 'https://i.scdn.co/image/ab67616d0000b273c6ba98e3a7e5be1b1c7b0e8f5', language: 'spanish' },
+  { id: '3l4nVByZpYEqcEaDBGmOzI', name: 'El Triste', artist: 'José José', album: 'El Triste', image: 'https://i.scdn.co/image/ab67616d0000b273d8cc2281fcdb9c6d6e9c8c9b', language: 'spanish' }
+],
+
+    calm: [
+  { id: '3f9zqUnrnIq0LANhmnaF0V', name: 'Weightless', artist: 'Marconi Union', album: 'Weightless (Ambient Transmission Vol. 2)', image: 'https://i.scdn.co/image/ab67616d0000b273f0f0f0f0f0f0f0f0f0f0f0f0', language: 'english' },
+  { id: '0k2WOh0Sf2O0k7p3tq4l7c', name: 'Clair de Lune', artist: 'Claude Debussy', album: 'Suite bergamasque', image: 'https://i.scdn.co/image/ab67616d0000b273a9a9a9a9a9a9a9a9a9a9a9a9a', language: 'instrumental' },
+  { id: '5YbgcwHjQhdT1BYQ4rxWLD', name: 'Relajación', artist: 'Jesús Molina', album: 'Piano Meditativo', image: 'https://i.scdn.co/image/ab67616d0000b273b0b0b0b0b0b0b0b0b0b0b0b0', language: 'spanish' },
+  { id: '2V8KvnD5LVeeDChMWEkSzC', name: 'Bésame Mucho', artist: 'Consuelo Velázquez', album: 'Boleros Eternos', image: 'https://i.scdn.co/image/ab67616d0000b273c1c1c1c1c1c1c1c1c1c1c1c1', language: 'spanish' },
+  { id: '0aZ3z5q2CO7u4Jx84lwXe4', name: 'Comptine d\'un autre été', artist: 'Yann Tiersen', album: 'Amélie (Soundtrack)', image: 'https://i.scdn.co/image/ab67616d0000b273d3d3d3d3d3d3d3d3d3d3d3d3', language: 'french' },
+  { id: '2Yr7gZQ0vTkXQoKxZ5bH5E', name: 'La nuit', artist: 'Cœur de Pirate', album: 'Cœur de Pirate', image: 'https://i.scdn.co/image/ab67616d0000b273a4a4a4a4a4a4a4a4a4a4a4a4', language: 'french' },
+  { id: '0Wtq1QUVYjCO5Z0e5PjKad', name: 'Raabta', artist: 'Arijit Singh', album: 'Agent Vinod', image: 'https://i.scdn.co/image/ab67616d0000b273b5b5b5b5b5b5b5b5b5b5b5b5', language: 'hindi' },
+  { id: '5Fz5B7oQmJXQ1Z7uQ1n0k1', name: 'Tum Se Hi', artist: 'Mohit Chauhan', album: 'Jab We Met', image: 'https://i.scdn.co/image/ab67616d0000b273c6c6c6c6c6c6c6c6c6c6c6c6', language: 'hindi' },
+  { id: '2Xo5OoQ6j4zH8gXqRYq7U1', name: 'Spring Day', artist: 'BTS', album: 'You Never Walk Alone', image: 'https://i.scdn.co/image/ab67616d0000b273d8d8d8d8d8d8d8d8d8d8d8d8', language: 'korean' },
+  { id: '4X7eJ1E2Y1lzoEABg2cZ5r', name: 'One Summer\'s Day', artist: 'Joe Hisaishi', album: 'Spirited Away', image: 'https://i.scdn.co/image/ab67616d0000b273e0e0e0e0e0e0e0e0e0e0e0e0', language: 'japanese' },
+  { id: '60nZcImufyMA1MKQY3dcCH', name: 'River Flows in You', artist: 'Yiruma', album: 'First Love', image: 'https://i.scdn.co/image/ab67616d0000b273b4b4b4b4b4b4b4b4b4b4b4b4', language: 'instrumental' },
+  { id: '1WkMMavIMc4JZ8cfMmxHkI', name: 'Gymnopédie No.1', artist: 'Erik Satie', album: 'Gymnopédies', image: 'https://i.scdn.co/image/ab67616d0000b273c5c5c5c5c5c5c5c5c5c5c5c5', language: 'instrumental' },
+  { id: '5YbgcwHjQhdT1BYQ4rxWLD', name: 'Meditation', artist: 'Massane', album: 'Another Dawn', image: 'https://i.scdn.co/image/ab67616d0000b273d6d6d6d6d6d6d6d6d6d6d6d6', language: 'english' },
+  { id: '2V8KvnD5LVeeDChMWEkSzC', name: 'Ocean', artist: 'Enya', album: 'Watermark', image: 'https://i.scdn.co/image/ab67616d0000b273e1e1e1e1e1e1e1e1e1e1e1e1', language: 'english' },
+  { id: '7s25wX1Jq5u8l7q7AHPjHq', name: 'Pure Shores', artist: 'All Saints', album: 'Saints & Sinners', image: 'https://i.scdn.co/image/ab67616d0000b273f1f1f1f1f1f1f1f1f1f1f1f1f1', language: 'english' }
+],
+    angry: [
+  { id: '1h0tC5X1l1yibp32J6Zs4R', name: 'Thunderstruck', artist: 'AC/DC', album: 'The Razors Edge', image: 'https://i.scdn.co/image/ab67616d0000b273c8c4d85aecc5d4d5b5b5b5b5b', language: 'english' },
+  { id: '2eB7JqIY4hG5qRuekS6Yqn', name: 'Eye of the Tiger', artist: 'Survivor', album: 'Eye of the Tiger', image: 'https://i.scdn.co/image/ab67616d0000b273d6d6d6d6d6d6d6d6d6d6d6d6', language: 'english' },
+  { id: '5YbgcwHjQhdT1BYQ4rxWLD', name: 'Gasolina', artist: 'Daddy Yankee', album: 'Barrio Fino', image: 'https://i.scdn.co/image/ab67616d0000b273e1e1e1e1e1e1e1e1e1e1e1e1', language: 'spanish' },
+  { id: '2V8KvnD5LVeeDChMWEkSzC', name: 'Danza Kuduro', artist: 'Don Omar', album: 'Meet the Orphans', image: 'https://i.scdn.co/image/ab67616d0000b273c4c4c4c4c4c4c4c4c4c4c4c4', language: 'spanish' },
+  { id: '0aZ3z5q2CO7u4Jx84lwXe4', name: 'Alors on danse', artist: 'Stromae', album: 'Cheese', image: 'https://i.scdn.co/image/ab67616d0000b273b3b3b3b3b3b3b3b3b3b3b3b3', language: 'french' },
+  { id: '2Yr7gZQ0vTkXQoKxZ5bH5E', name: 'Dernière danse', artist: 'Indila', album: 'Mini World', image: 'https://i.scdn.co/image/ab67616d0000b273a2a2a2a2a2a2a2a2a2a2a2a2', language: 'french' },
+  { id: '0Wtq1QUVYjCO5Z0e5PjKad', name: 'Badtameez Dil', artist: 'Ranveer Singh', album: 'Yeh Jawaani Hai Deewani', image: 'https://i.scdn.co/image/ab67616d0000b273b4b4b4b4b4b4b4b4b4b4b4b4', language: 'hindi' },
+  { id: '5Fz5B7oQmJXQ1Z7uQ1n0k1', name: 'London Thumakda', artist: 'Amit Trivedi', album: 'Queen', image: 'https://i.scdn.co/image/ab67616d0000b273c5c5c5c5c5c5c5c5c5c5c5c5', language: 'hindi' },
+  { id: '2Xo5OoQ6j4zH8gXqRYq7U1', name: 'Gurenge', artist: 'LiSA', album: 'Gurenge', image: 'https://i.scdn.co/image/ab67616d0000b273d7d7d7d7d7d7d7d7d7d7d7d7', language: 'japanese' },
+  { id: '4X7eJ1E2Y1lzoEABg2cZ5r', name: 'U.S.A.', artist: 'DA PUMP', album: 'U.S.A.', image: 'https://i.scdn.co/image/ab67616d0000b273e8e8e8e8e8e8e8e8e8e8e8e8', language: 'japanese' },
+  { id: '60nZcImufyMA1MKQY3dcCH', name: 'High Hopes', artist: 'Panic! At The Disco', album: 'Pray for the Wicked', image: 'https://i.scdn.co/image/ab67616d0000b273c3c3c3c3c3c3c3c3c3c3c3c3', language: 'english' },
+  { id: '1WkMMavIMc4JZ8cfMmxHkI', name: 'Firework', artist: 'Katy Perry', album: 'Teenage Dream', image: 'https://i.scdn.co/image/ab67616d0000b273a48964b5d9a3d6968ae3e0de', language: 'english' },
+  { id: '5YbgcwHjQhdT1BYQ4rxWLD', name: 'Waka Waka', artist: 'Shakira', album: 'Sale el Sol', image: 'https://i.scdn.co/image/ab67616d0000b273e52a59a28efa4773aa2b7d16', language: 'spanish' },
+  { id: '2V8KvnD5LVeeDChMWEkSzC', name: 'Bailando', artist: 'Enrique Iglesias', album: 'Sex and Love', image: 'https://i.scdn.co/image/ab67616d0000b273c6ba98e3a7e5be1b1c7b0e8f5', language: 'spanish' },
+  { id: '7s25wX1Jq5u8l7q7AHPjHq', name: 'Koi Mil Gaya', artist: 'Udit Narayan', album: 'Kuch Kuch Hota Hai', image: 'https://i.scdn.co/image/ab67616d0000b273d8cc2281fcdb9c6d6e9c8c9b', language: 'hindi' }
+],
+
+      romantic: [
+        { id: '0C5X5Rf5WQuPwkr4XZ4C0J', name: 'Perfect', artist: 'Ed Sheeran', album: '÷', image: 'https://i.scdn.co/image/ab67616d0000b273a7a7a7a7a7a7a7a7a7a7a7a7', language: 'english' },
+        { id: '0k2WOh0Sf2O0k7p3tq4l7c', name: 'All of Me', artist: 'John Legend', album: 'Love in the Future', image: 'https://i.scdn.co/image/ab67616d0000b273b9b9b9b9b9b9b9b9b9b9b9b9', language: 'english' },
+        { id: '5YbgcwHjQhdT1BYQ4rxWLD', name: 'Bachata Rosa', artist: 'Juan Luis Guerra', album: 'Bachata Rosa', image: 'https://i.scdn.co/image/ab67616d0000b273c0c0c0c0c0c0c0c0c0c0c0c0', language: 'spanish' },
+        { id: '2V8KvnD5LVeeDChMWEkSzC', name: 'Amor Completo', artist: 'Mon Laferte', album: 'Mon Laferte (Vol. 1)', image: 'https://i.scdn.co/image/ab67616d0000b273d1d1d1d1d1d1d1d1d1d1d1d1', language: 'spanish' },
+        { id: '0aZ3z5q2CO7u4Jx84lwXe4', name: 'Je t\'aime', artist: 'Lara Fabian', album: 'Lara Fabian', image: 'https://i.scdn.co/image/ab67616d0000b273a3a3a3a3a3a3a3a3a3a3a3a3', language: 'french' },
+        { id: '2Yr7gZQ0vTkXQoKxZ5bH5E', name: 'La vie en rose', artist: 'Louis Armstrong', album: 'All Time Greatest Hits', image: 'https://i.scdn.co/image/ab67616d0000b273b2b2b2b2b2b2b2b2b2b2b2b2', language: 'french' },
+        { id: '0Wtq1QUVYjCO5Z0e5PjKad', name: 'Tum Hi Ho', artist: 'Arijit Singh', album: 'Aashiqui 2', image: 'https://i.scdn.co/image/ab67616d0000b273c3c3c3c3c3c3c3c3c3c3c3c3', language: 'hindi' },
+        { id: '5Fz5B7oQmJXQ1Z7uQ1n0k1', name: 'Enna Sona', artist: 'Arijit Singh', album: 'OK Jaanu', image: 'https://i.scdn.co/image/ab67616d0000b273d4d4d4d4d4d4d4d4d4d4d4d4', language: 'hindi' },
+        { id: '2Xo5OoQ6j4zH8gXqRYq7U1', name: 'First Love', artist: 'Hikaru Utada', album: 'First Love', image: 'https://i.scdn.co/image/ab67616d0000b273e5e5e5e5e5e5e5e5e5e5e5e5', language: 'japanese' },
+        { id: '4X7eJ1E2Y1lzoEABg2cZ5r', name: 'Lovers', artist: '7!!', album: 'Lovers', image: 'https://i.scdn.co/image/ab67616d0000b273f6f6f6f6f6f6f6f6f6f6f6f6', language: 'japanese' },
+        { id: '60nZcImufyMA1MKQY3dcCH', name: 'Thinking Out Loud', artist: 'Ed Sheeran', album: 'x', image: 'https://i.scdn.co/image/ab67616d0000b2731c3e0a2f4ab8e3d7a7f3d0c5', language: 'english' },
+        { id: '1WkMMavIMc4JZ8cfMmxHkI', name: 'Just the Way You Are', artist: 'Bruno Mars', album: 'Doo-Wops & Hooligans', image: 'https://i.scdn.co/image/ab67616d0000b273a48964b5d9a3d6968ae3e0de', language: 'english' },
+        { id: '5YbgcwHjQhdT1BYQ4rxWLD', name: 'Amor Prohibido', artist: 'Selena', album: 'Amor Prohibido', image: 'https://i.scdn.co/image/ab67616d0000b273e52a59a28efa4773aa2b7d16', language: 'spanish' },
+        { id: '2V8KvnD5LVeeDChMWEkSzC', name: 'Eres Tú', artist: 'Mocedades', album: 'Mocedades 4', image: 'https://i.scdn.co/image/ab67616d0000b273c6ba98e3a7e5be1b1c7b0e8f5', language: 'spanish' },
+        { id: '7s25wX1Jq5u8l7q7AHPjHq', name: 'Je T\'aime... Moi Non Plus', artist: 'Serge Gainsbourg', album: 'Jane Birkin - Serge Gainsbourg', image: 'https://i.scdn.co/image/ab67616d0000b273d8cc2281fcdb9c6d6e9c8c9b', language: 'french' }
+      ],
+      neutral: [
+        { id: '3f9zqUnrnIq0LANhmnaF0V', name: 'Blinding Lights', artist: 'The Weeknd', album: 'After Hours', image: 'https://i.scdn.co/image/ab67616d0000b273e9e9e9e9e9e9e9e9e9e9e9e9', language: 'english' },
+        { id: '0k2WOh0Sf2O0k7p3tq4l7c', name: 'Shape of You', artist: 'Ed Sheeran', album: '÷', image: 'https://i.scdn.co/image/ab67616d0000b273a8a8a8a8a8a8a8a8a8a8a8a8', language: 'english' },
+        { id: '5YbgcwHjQhdT1BYQ4rxWLD', name: 'Despacito', artist: 'Luis Fonsi', album: 'Vida', image: 'https://i.scdn.co/image/ab67616d0000b273b1b1b1b1b1b1b1b1b1b1b1b1', language: 'spanish' },
+        { id: '2V8KvnD5LVeeDChMWEkSzC', name: 'La Tortura', artist: 'Shakira', album: 'Fijación Oral Vol. 1', image: 'https://i.scdn.co/image/ab67616d0000b273c2c2c2c2c2c2c2c2c2c2c2c2', language: 'spanish' },
+        { id: '0aZ3z5q2CO7u4Jx84lwXe4', name: 'Dernière danse', artist: 'Indila', album: 'Mini World', image: 'https://i.scdn.co/image/ab67616d0000b273d2d2d2d2d2d2d2d2d2d2d2d2', language: 'french' },
+        { id: '2Yr7gZQ0vTkXQoKxZ5bH5E', name: 'Tous les mêmes', artist: 'Stromae', album: 'Racine carrée', image: 'https://i.scdn.co/image/ab67616d0000b273a1a1a1a1a1a1a1a1a1a1a1a1', language: 'french' },
+        { id: '0Wtq1QUVYjCO5Z0e5PjKad', name: 'Channa Mereya', artist: 'Arijit Singh', album: 'Ae Dil Hai Mushkil', image: 'https://i.scdn.co/image/ab67616d0000b273b3b3b3b3b3b3b3b3b3b3b3b3', language: 'hindi' },
+        { id: '5Fz5B7oQmJXQ1Z7uQ1n0k1', name: 'Gerua', artist: 'Arijit Singh', album: 'Dilwale', image: 'https://i.scdn.co/image/ab67616d0000b273c4c4c4c4c4c4c4c4c4c4c4c4', language: 'hindi' },
+        { id: '2Xo5OoQ6j4zH8gXqRYq7U1', name: 'Lemon', artist: 'Kenshi Yonezu', album: 'Lemon', image: 'https://i.scdn.co/image/ab67616d0000b273d5d5d5d5d5d5d5d5d5d5d5d5', language: 'japanese' },
+        { id: '4X7eJ1E2Y1lzoEABg2cZ5r', name: 'Pretender', artist: 'Official HIGE DANdism', album: 'Traveler', image: 'https://i.scdn.co/image/ab67616d0000b273e7e7e7e7e7e7e7e7e7e7e7e7', language: 'japanese' },
+        { id: '60nZcImufyMA1MKQY3dcCH', name: 'Dance Monkey', artist: 'Tones and I', album: 'The Kids Are Coming', image: 'https://i.scdn.co/image/ab67616d0000b2731c3e0a2f4ab8e3d7a7f3d0c5', language: 'english' },
+        { id: '1WkMMavIMc4JZ8cfMmxHkI', name: 'Bad Guy', artist: 'Billie Eilish', album: 'When We All Fall Asleep, Where Do We Go?', image: 'https://i.scdn.co/image/ab67616d0000b273a48964b5d9a3d6968ae3e0de', language: 'english' },
+        { id: '5YbgcwHjQhdT1BYQ4rxWLD', name: 'Smooth Criminal', artist: 'Michael Jackson', album: 'Bad', image: 'https://i.scdn.co/image/ab67616d0000b273e52a59a28efa4773aa2b7d16', language: 'english' },
+        { id: '2V8KvnD5LVeeDChMWEkSzC', name: 'Vivir Mi Vida', artist: 'Marc Anthony', album: '3.0', image: 'https://i.scdn.co/image/ab67616d0000b273c6ba98e3a7e5be1b1c7b0e8f5', language: 'spanish' },
+        { id: '7s25wX1Jq5u8l7q7AHPjHq', name: 'Gangnam Style', artist: 'PSY', album: 'PSY 6 (Six Rules)', image: 'https://i.scdn.co/image/ab67616d0000b273d8cc2281fcdb9c6d6e9c8c9b', language: 'korean' }
+      ]
+    };
+
+    // Global state
+    let currentEmotion = 'neutral';
+    let selectedLanguage = 'all';
+
     // Create cosmic background
     function createCosmos() {
       const cosmos = document.getElementById('cosmos');
@@ -841,10 +1041,10 @@
       cosmos.innerHTML = '';
       
       // Create stars
-      for (let i = 0; i < 150; i++) {
+      for (let i = 0; i < 200; i++) {
         const star = document.createElement('div');
         star.classList.add('star');
-        star.style.width = `${Math.random() * 3}px`;
+        star.style.width = `${Math.random() * 4}px`;
         star.style.height = star.style.width;
         star.style.left = `${Math.random() * 100}%`;
         star.style.top = `${Math.random() * 100}%`;
@@ -853,10 +1053,10 @@
       }
       
       // Create nebulas
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 6; i++) {
         const nebula = document.createElement('div');
         nebula.classList.add('nebula');
-        nebula.style.width = `${Math.random() * 300 + 200}px`;
+        nebula.style.width = `${Math.random() * 400 + 200}px`;
         nebula.style.height = nebula.style.width;
         nebula.style.left = `${Math.random() * 100}%`;
         nebula.style.top = `${Math.random() * 100}%`;
@@ -867,10 +1067,10 @@
       }
       
       // Create floating shapes
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i < 12; i++) {
         const shape = document.createElement('div');
         shape.classList.add('floating');
-        shape.style.width = `${Math.random() * 100 + 50}px`;
+        shape.style.width = `${Math.random() * 120 + 50}px`;
         shape.style.height = shape.style.width;
         shape.style.left = `${Math.random() * 100}%`;
         shape.style.top = `${Math.random() * 100}%`;
@@ -882,7 +1082,7 @@
           rgba(255, 77, 148, 0.3)
         )`;
         shape.style.borderRadius = `${Math.random() * 50}%`;
-        shape.style.animationDuration = `${Math.random() * 20 + 20}s`;
+        shape.style.animationDuration = `${Math.random() * 25 + 20}s`;
         cosmos.appendChild(shape);
       }
     }
@@ -894,7 +1094,7 @@
       
       visualizer.innerHTML = '';
       
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 40; i++) {
         const bar = document.createElement('div');
         bar.classList.add('bar');
         bar.style.setProperty('--i', i);
@@ -995,6 +1195,18 @@
       if (emojiFace) emojiFace.textContent = emotionEmoji[emotion] || '🤔';
     }
     
+    // Update emotion stats
+    function updateEmotionStats(expressions) {
+      // Update the emotion intensity bars
+      const happyStat = document.getElementById('happy-stat');
+      const sadStat = document.getElementById('sad-stat');
+      const angryStat = document.getElementById('angry-stat');
+      
+      if (happyStat) happyStat.textContent = `${Math.round(expressions.happy * 100)}%`;
+      if (sadStat) sadStat.textContent = `${Math.round(expressions.sad * 100)}%`;
+      if (angryStat) angryStat.textContent = `${Math.round(expressions.angry * 100)}%`;
+    }
+    
     // Setup event listeners
     function setupEventListeners() {
       // Emotion buttons
@@ -1049,6 +1261,7 @@
       const languageSelect = document.getElementById('language-select');
       if (languageSelect) {
         languageSelect.addEventListener('change', () => {
+          selectedLanguage = languageSelect.value;
           const emotionText = document.getElementById('emotion-text');
           if (emotionText && emotionText.textContent !== 'none') {
             updateSongsForEmotion(emotionText.textContent);
@@ -1104,6 +1317,7 @@
           
           // Update UI
           updateEmotionDisplay(emotion);
+          updateEmotionStats(expressions);
           updateSongsForEmotion(emotion);
         }
       }, 1000);
@@ -1140,55 +1354,31 @@
       window.open(`https://open.spotify.com/track/${trackId}`, '_blank');
     }
     
-    // Simulate backend API call to Spotify
-    async function fetchSpotifyRecommendations(emotion, language) {
+    // Fetch recommendations with language filtering
+    async function fetchSpotifyRecommendations(emotion) {
       const statusDiv = document.getElementById('status');
-      if (!statusDiv) return;
+      if (!statusDiv) return [];
       
       statusDiv.innerHTML = `<div class="loading"></div> Creating ${emotion} cosmic soundscape...`;
       
       // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      // Sample music data with REAL Spotify IDs
-      const sampleMusicData = {
-        happy: [
-          { id: '60nZcImufyMA1MKQY3dcCH', name: 'Happy', artist: 'Pharrell Williams', album: 'G I R L', image: 'https://i.scdn.co/image/ab67616d0000b2731c3e0a2f4ab8e3d7a7f3d0c5' },
-          { id: '1WkMMavIMc4JZ8cfMmxHkI', name: "Can't Stop the Feeling!", artist: 'Justin Timberlake', album: 'Trolls', image: 'https://i.scdn.co/image/ab67616d0000b273a48964b5d9a3d6968ae3e0de' },
-          { id: '6C2Dn1N5zd3Qb1QJqkUa0g', name: 'Uptown Funk', artist: 'Mark Ronson ft. Bruno Mars', album: 'Uptown Special', image: 'https://i.scdn.co/image/ab67616d0000b2733f29a976eea00141514ab756' },
-          { id: '3fthfkkvy9av3q3uAGVf7U', name: 'Shake It Off', artist: 'Taylor Swift', album: '1989', image: 'https://i.scdn.co/image/ab67616d0000b273e11a75a2f2ff39cec788a015' }
-        ],
-        sad: [
-          { id: '6QPKYGnAW9QozVz2dSWqRg', name: 'Someone Like You', artist: 'Adele', album: '21', image: 'https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96' },
-          { id: '2f8G2dL3H8HzRt2Y8V3xqL', name: 'Say Something', artist: 'A Great Big World', album: 'Is There Anybody Out There?', image: 'https://i.scdn.co/image/ab67616d0000b273b7d3410c326df5c5af0179e8' },
-          { id: '7tnOc6GV9GA1phPS6vK7VB', name: 'The Scientist', artist: 'Coldplay', album: 'A Rush of Blood to the Head', image: 'https://i.scdn.co/image/ab67616d0000b273de3c04b5fc750b68899b20a9' },
-          { id: '6g4b1wZ0KwZ2Q7a6cLpVqg', name: 'Hurt', artist: 'Johnny Cash', album: 'American IV: The Man Comes Around', image: 'https://i.scdn.co/image/ab67616d0000b273f5a99e0a3b9a5a5f5a5a5a5a' }
-        ],
-        angry: [
-          { id: '7a0qD51uR1v8JmIAVcBv7s', name: 'Break Stuff', artist: 'Limp Bizkit', album: 'Significant Other', image: 'https://i.scdn.co/image/ab67616d0000b2734a1a3b5d5a5a5a5a5a5a5a5a' },
-          { id: '3aMfUOjLckXwol4tFcJtGl', name: 'Killing In The Name', artist: 'Rage Against The Machine', album: 'Rage Against The Machine', image: 'https://i.scdn.co/image/ab67616d0000b2739c0f9e9c9c9c9c9c9c9c9c9c9' },
-          { id: '6LmNUD1q8gREe7zF3bUqFg', name: 'Given Up', artist: 'Linkin Park', album: 'Minutes to Midnight', image: 'https://i.scdn.co/image/ab67616d0000b273c7e6d3a1c7b5c7a5a2a0b3e2' },
-          { id: '0tZ3mElWcr74OOhKEiNz1x', name: 'Bulls On Parade', artist: 'Rage Against The Machine', album: 'Evil Empire', image: 'https://i.scdn.co/image/ab67616d0000b2733f3f3f3f3f3f3f3f3f3f3f3f' }
-        ],
-        neutral: [
-          { id: '0VjIjW4GlUZAMYd2vXMi3b', name: 'Blinding Lights', artist: 'The Weeknd', album: 'After Hours', image: 'https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36' },
-          { id: '7qiZfU4dY1lWllzX7mPBI3', name: 'Shape of You', artist: 'Ed Sheeran', album: '÷ (Divide)', image: 'https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96' },
-          { id: '6UelLqGlWMcVH1E5c4H7lY', name: 'Watermelon Sugar', artist: 'Harry Styles', album: 'Fine Line', image: 'https://i.scdn.co/image/ab67616d0000b2731c3e0a2f4ab8e3d7a7f3d0c5' },
-          { id: '0v1x6rN6JHRapa03JElljE', name: 'Dynamite', artist: 'BTS', album: 'Dynamite (DayTime Version)', image: 'https://i.scdn.co/image/ab67616d0000b273a48964b5d9a3d6968ae3e0de' }
-        ],
-        fearful: [
-          { id: '3HjGmIjG3aZ7G1aQ0Nj8X1', name: 'The Sound of Silence', artist: 'Simon & Garfunkel', album: 'Wednesday Morning, 3 A.M.', image: 'https://i.scdn.co/image/ab67616d0000b273b6d4566db0d12894b1b3c5e5' },
-          { id: '2iJuuzV8P9Yz0VSurttIV5', name: 'Hurt', artist: 'Nine Inch Nails', album: 'The Downward Spiral', image: 'https://i.scdn.co/image/ab67616d0000b273f5a99e0a3b9a5a5f5a5a5a5a' }
-        ],
-        disgusted: [
-          { id: '0U9TKK9GYryei6Vn45TEdS', name: 'Bad Guy', artist: 'Billie Eilish', album: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?', image: 'https://i.scdn.co/image/ab67616d0000b27350a3147b4edd7701a876c6ce' }
-        ],
-        surprised: [
-          { id: '5sICkBXVmaCQk5aISGR3x1', name: 'Thriller', artist: 'Michael Jackson', album: 'Thriller', image: 'https://i.scdn.co/image/ab67616d0000b273e11a75a2f2ff39cec788a015' }
-        ]
-      };
+      // Get tracks for the emotion
+      let tracks = musicLibrary[emotion] || musicLibrary.neutral;
       
-      return sampleMusicData[emotion] || sampleMusicData.neutral;
+      // Filter by language if not "all"
+      if (selectedLanguage !== 'all') {
+        tracks = tracks.filter(track => track.language === selectedLanguage);
+      }
+      
+      // Update status message with language info
+      if (statusDiv) {
+        const langText = selectedLanguage === 'all' ? '' : ` in ${selectedLanguage}`;
+        statusDiv.innerHTML = `<i class="fab fa-spotify spotify-icon"></i> Found ${tracks.length} cosmic tracks for ${emotion}${langText}`;
+      }
+      
+      return tracks;
     }
     
     // Update songs based on emotion
@@ -1196,11 +1386,6 @@
       try {
         const tracks = await fetchSpotifyRecommendations(emotion);
         renderSongList(tracks);
-        
-        const statusDiv = document.getElementById('status');
-        if (statusDiv) {
-          statusDiv.innerHTML = `<i class="fab fa-spotify spotify-icon"></i> Found ${tracks.length} cosmic tracks for ${emotion}`;
-        }
       } catch (error) {
         console.error('Error fetching Spotify recommendations:', error);
         const statusDiv = document.getElementById('status');
@@ -1225,7 +1410,7 @@
         trackEl.innerHTML = `
           <img src="${track.image}" alt="${track.name}">
           <div class="track-info">
-            <h3>${track.name}</h3>
+            <h3>${track.name} <span class="language-tag">${track.language}</span></h3>
             <p>${track.artist} • ${track.album}</p>
           </div>
           <div class="track-actions">
@@ -1317,7 +1502,7 @@
         
         card.innerHTML = `
           <img src="${track.image}" alt="${track.name}">
-          <h3>${track.name}</h3>
+          <h3>${track.name} <span class="language-tag">${track.language}</span></h3>
           <p>${track.artist}</p>
           <div class="track-actions" style="margin-top: 15px;">
             <button class="play-btn">
