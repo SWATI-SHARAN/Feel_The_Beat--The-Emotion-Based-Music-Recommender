@@ -53,7 +53,7 @@ Just open `index.html` in your browser.
 |--------------|---------------------------------|
 | Frontend     | HTML, CSS, JavaScript          |
 | Emotion AI   | `face-api.js` (TensorFlow.js)  |
-| Animations   | CSS3, optional GSAP            |
+| Animations   | CSS3, GSAP                     |
 | Music Source | Spotify / YouTube embeds       |
 | UI Icons     | Font Awesome, Emojis           |
 
